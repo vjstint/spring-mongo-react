@@ -5,3 +5,14 @@ services:
     image: dharini/spring-react-mongo-docker
     ports:
       - 8080:8080
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: bitnami/mongodb:4.0
+    restart: always
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ./mongodb_data:/data/db
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
